@@ -3,34 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador de Copa do Mundo</title>
+    <title>Simulador de Copa</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f9;
             color: #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             margin: 0;
-        }
-        .container {
-            text-align: center;
             padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        /* Container que vai segurar todos os grupos */
+        #grupos-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* O Flexbox que divide a tela em duas partes para cada grupo */
+        .grupo-linha {
+            display: flex;
+            justify-content: space-between;
             background: white;
+            padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            gap: 20px; /* Espaço entre a tabela e a área em branco */
+        }
+
+        /* Lado Esquerdo: A Tabela (ocupa 50% do espaço) */
+        .secao-tabela {
+            flex: 1;
+        }
+
+        .secao-tabela h2 {
+            margin-top: 0;
+            color: #2c3e50;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f8f9fa;
+        }
+
+        /* Lado Direito: A Seção em Branco (ocupa os outros 50%) */
+        .secao-jogos {
+            flex: 1;
+            border-radius: 8px;
+            background-color: #fafafa;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .jogo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .jogo-info {
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .botoes-resultado {
+            display: flex;
+            gap: 10px;
+        }
+
+        .botoes-resultado button {
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .botoes-resultado button:hover {
+            background-color: #e0e0e0;
+        }
+
+        /* Classes para feedback visual dos botões */
+        .vitoria-selecionada {
+            background-color: #a7f3d0 !important; /* Verde claro */
+            border-color: #34d399 !important;
+        }
+
+        .empate-selecionado {
+            background-color: #fef08a !important; /* Amarelo claro */
+            border-color: #facc15 !important;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>🏆 Simulador de Copa</h1>
-        <p>Os dados do JSON estão sendo processados no console do navegador.</p>
-        <p><small>Abra a aba <strong>Console (F12)</strong> para visualizar.</small></p>
-    </div>
+    <h1>🏆 Simulador de Copa</h1>
+    
+    <div id="grupos-container"></div>
 
     <script src="./js/main.js"></script>
 </body>

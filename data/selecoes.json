@@ -4,25 +4,29 @@
       "id": 1,
       "nome": "México",
       "pontos": 0,
-      "saldo" : 0
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_Mexico.svg"
     },
     {
       "id": 2,
       "nome": "República da Coreia",
       "pontos": 0,
-      "saldo" : 0
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_Republica_da_Coreia.svg"
     },
     {
       "id": 3,
       "nome": "Tchéquia",
       "pontos": 0,
-      "saldo" : 0
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_Tchéquia.svg"
     },
     {
       "id": 4,
       "nome": "África do Sul",
       "pontos": 0,
-      "saldo" : 0
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_Africa_do_Sul.svg"
     }
   ],
   "Grupo B": [
@@ -30,25 +34,59 @@
       "id": 5,
       "nome": "Suíça",
       "pontos": 0,
-      "saldo" : 0
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_suica.svg"
     },
     {
       "id": 6,
       "nome": "Canadá",
       "pontos": 0,
-      "saldo" : 0
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_Canada.svg"
     },
     {
       "id": 7,
       "nome": "Catar",
       "pontos": 0,
-      "saldo" : 0
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_Catar.svg"
     },
     {
       "id": 8,
       "nome": "Bósnia e Herzegovina",
       "pontos": 0,
-      "saldo" : 0
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_Bosnia_e_Herzegovina.svg"
+    }
+  ],
+  "Grupo C": [
+    {
+      "id": 9,
+      "nome": "Escócia",
+      "pontos": 0,
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_Escocia.svg"
+    },
+    {
+      "id": 10,
+      "nome": "Marrocos",
+      "pontos": 0,
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_Morrocos.svg"
+    },
+    {
+      "id": 11,
+      "nome": "Brasil",
+      "pontos": 0,
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_Brasil.svg"
+    },
+    {
+      "id": 12,
+      "nome": "Haiti",
+      "pontos": 0,
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_Haiti.svg"
     }
   ]
 }

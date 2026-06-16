@@ -33,7 +33,7 @@ fetch('./data/selecoes.json')
         dados[nomeGrupo].forEach(time => {
             htmlGerado += `
                             <tr data-time-id="${time.id}">
-                                <td>${time.nome}</td>
+                                <td><img src="${time.bandeira}" alt="Bandeira de ${time.nome}" class="bandeira-tabela">${time.nome}</td>
                                 <td>${time.pontos}</td>
                                 <td>${time.saldo}</td>
                             </tr>
@@ -56,7 +56,11 @@ fetch('./data/selecoes.json')
                 
                 <div class="secao-jogos">
                     <div class="jogo" data-jogo-id="${idJogo1}">
-                        <div class="jogo-info">${time1.nome} vs ${time2.nome}</div>
+                        <div class="jogo-info">
+                            <img src="${time1.bandeira}" class="bandeira-jogo">
+                            ${time1.nome} vs ${time2.nome}
+                            <img src="${time2.bandeira}" class="bandeira-jogo">
+                        </div>
                         <div class="botoes-resultado">
                             <button data-resultado="vitoria" onclick="registrarResultado('${nomeGrupo}', ${time1.id}, ${time2.id}, 'vitoria', this)">Vitória ${time1.nome}</button>
                             <button data-resultado="empate" onclick="registrarResultado('${nomeGrupo}', ${time1.id}, ${time2.id}, 'empate', this)">Empate</button>
@@ -64,7 +68,11 @@ fetch('./data/selecoes.json')
                         </div>
                     </div>
                     <div class="jogo" data-jogo-id="${idJogo2}">
-                        <div class="jogo-info">${time3.nome} vs ${time4.nome}</div>
+                        <div class="jogo-info">
+                            <img src="${time3.bandeira}" class="bandeira-jogo">
+                            ${time3.nome} vs ${time4.nome}
+                            <img src="${time4.bandeira}" class="bandeira-jogo">
+                        </div>
                         <div class="botoes-resultado">
                             <button data-resultado="vitoria" onclick="registrarResultado('${nomeGrupo}', ${time3.id}, ${time4.id}, 'vitoria', this)">Vitória ${time3.nome}</button>
                             <button data-resultado="empate" onclick="registrarResultado('${nomeGrupo}', ${time3.id}, ${time4.id}, 'empate', this)">Empate</button>

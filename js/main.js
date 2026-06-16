@@ -86,6 +86,9 @@ fetch('./data/selecoes.json')
 
     containerPrincipal.innerHTML = htmlGerado;
     window.dadosCopa = dados;
+
+    // Adiciona o listener para o botão de avançar
+    document.getElementById('avancar-mata-mata').addEventListener('click', avancarParaMataMata);
   })
   .catch(erro => {
     console.error("❌ Ocorreu um erro ao ler os dados:", erro);
@@ -137,13 +140,12 @@ function atualizarTabela(nomeGrupo) {
     if (!grupoLinha) return;
 
     const tabelaBody = grupoLinha.querySelector('tbody');
-    const timesOrdenados = [...window.dadosCopa[nomeGrupo]].sort((a, b) => b.pontos - a.pontos);
+    const timesOrdenados = [...window.dadosCopa[nomeGrupo]].sort((a, b) => b.pontos - a.pontos || b.saldo - a.saldo);
 
     timesOrdenados.forEach(time => {
         const linhaTime = tabelaBody.querySelector(`tr[data-time-id="${time.id}"]`);
         if (linhaTime) {
             linhaTime.children[1].textContent = time.pontos;
-            // Adiciona a linha ao final do corpo da tabela para reordenar visualmente
             tabelaBody.appendChild(linhaTime);
         }
     });
@@ -156,21 +158,83 @@ function atualizarBotoes(idJogo) {
     const botoes = jogoDiv.querySelectorAll('.botoes-resultado button');
     const resultadoAtual = estadoJogos[idJogo];
 
-    // Limpa todas as classes de seleção
     botoes.forEach(btn => {
         btn.classList.remove('vitoria-selecionada', 'empate-selecionado');
     });
 
-    // Aplica a classe correta se houver um resultado ativo
     if (resultadoAtual) {
         const botaoAtivo = jogoDiv.querySelector(`button[data-resultado="${resultadoAtual}"]`);
         if (botaoAtivo) {
             if (resultadoAtual === 'empate') {
                 botaoAtivo.classList.add('empate-selecionado');
             } else {
-                // 'vitoria' ou 'derrota' usam a cor de vitória
                 botaoAtivo.classList.add('vitoria-selecionada');
             }
         }
     }
+}
+
+function avancarParaMataMata() {
+    const classificados = {};
+    const todosOsGrupos = Object.keys(window.dadosCopa);
+    let terceirosColocados = [];
+
+    // 1. Identificar classificados de cada grupo
+    todosOsGrupos.forEach(nomeGrupo => {
+        const timesOrdenados = [...window.dadosCopa[nomeGrupo]].sort((a, b) => b.pontos - a.pontos || b.saldo - a.saldo);
+        
+        classificados[`1${nomeGrupo.charAt(6)}`] = timesOrdenados[0];
+        classificados[`2${nomeGrupo.charAt(6)}`] = timesOrdenados[1];
+        terceirosColocados.push(timesOrdenados[2]);
+    });
+
+    // 2. Ordenar e selecionar os melhores terceiros
+    terceirosColocados.sort((a, b) => {
+        if (b.pontos !== a.pontos) {
+            return b.pontos - a.pontos;
+        }
+        if (b.saldo !== a.saldo) {
+            return b.saldo - a.saldo;
+        }
+        return Math.random() - 0.5; // Sorteio aleatório em caso de empate total
+    });
+
+    classificados['31'] = terceirosColocados[0];
+    classificados['32'] = terceirosColocados[1];
+
+    // 3. Construir e exibir o mata-mata
+    construirChaveMataMata(classificados);
+}
+
+function construirChaveMataMata(timesMapeados) {
+    fetch('./data/mata-mata.json')
+        .then(response => response.json())
+        .then(estruturaMataMata => {
+            const container = document.getElementById('mata-mata-container');
+            
+            let htmlQuartas = '<div class="fase"><h2>Quartas de Final</h2>';
+            estruturaMataMata.quartas.forEach(jogo => {
+                const time1 = timesMapeados[jogo.time1_placeholder];
+                const time2 = timesMapeados[jogo.time2_placeholder];
+                htmlQuartas += `
+                    <div class="confronto">
+                        <div class="time">
+                            <img src="${time1.bandeira}" alt="">
+                            <span>${time1.nome}</span>
+                        </div>
+                        <div class="time">
+                            <img src="${time2.bandeira}" alt="">
+                            <span>${time2.nome}</span>
+                        </div>
+                    </div>
+                `;
+            });
+            htmlQuartas += '</div>';
+
+            // Placeholder para futuras fases
+            const htmlSemis = '<div class="fase"><h2>Semifinais</h2></div>';
+            const htmlFinal = '<div class="fase"><h2>Final</h2></div>';
+
+            container.innerHTML = htmlQuartas + htmlSemis + htmlFinal;
+        });
 }

@@ -163,26 +163,64 @@
 
         /* Estilos para a chave do Mata-Mata */
         #mata-mata-container {
-            display: flex;
-            justify-content: space-between;
-            max-width: 1200px;
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Duas colunas principais para esquerda e direita */
+            grid-template-areas:
+                "esquerda direita"
+                "final final"
+                "terceiro terceiro";
+            max-width: 1400px;
             margin: 40px auto;
-            padding: 20px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            gap: 20px;
+        }
+
+        .chave {
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+        }
+
+        #chave-esquerda {
+            grid-area: esquerda;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        #chave-direita {
+            grid-area: direita;
+            flex-direction: row-reverse;
+            justify-content: space-between;
+        }
+
+        #finais-container {
+            grid-area: final;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        #terceiro-lugar-container {
+            grid-area: terceiro;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
         }
 
         .fase {
             display: flex;
             flex-direction: column;
             justify-content: space-around;
-            flex-grow: 1;
+            width: 45%;
+            gap: 20px;
         }
 
-        .fase h2 {
+        .fase h2, #finais-container h2, #terceiro-lugar-container h2 {
             text-align: center;
             color: #2c3e50;
+            margin-bottom: 10px;
         }
 
         .confronto {
@@ -190,7 +228,9 @@
             border: 1px solid #eee;
             border-radius: 8px;
             padding: 15px;
-            margin: 10px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
 
         .time {
@@ -202,6 +242,27 @@
         .time img {
             width: 30px;
             height: 20px;
+        }
+
+        .time button {
+            margin-left: auto;
+            padding: 5px 10px;
+            border: 1px solid #ccc;
+            background-color: #f0f0f0;
+            cursor: pointer;
+            font-size: 1.2em;
+        }
+
+        .time.vencedor {
+            font-weight: bold;
+        }
+
+        .time.perdedor {
+            opacity: 0.5;
+        }
+
+        .time.perdedor button {
+            display: none;
         }
     </style>
 </head>
@@ -215,7 +276,12 @@
         <button id="avancar-mata-mata">Avançar para o Mata-Mata</button>
     </div>
 
-    <div id="mata-mata-container"></div>
+    <div id="mata-mata-container">
+        <div id="chave-esquerda" class="chave"></div>
+        <div id="chave-direita" class="chave"></div>
+        <div id="finais-container"></div>
+        <div id="terceiro-lugar-container"></div>
+    </div>
 
     <script src="./js/main.js"></script>
 </body>

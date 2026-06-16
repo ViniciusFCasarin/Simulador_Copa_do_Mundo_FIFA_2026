@@ -210,31 +210,130 @@ function construirChaveMataMata(timesMapeados) {
     fetch('./data/mata-mata.json')
         .then(response => response.json())
         .then(estruturaMataMata => {
-            const container = document.getElementById('mata-mata-container');
-            
-            let htmlQuartas = '<div class="fase"><h2>Quartas de Final</h2>';
-            estruturaMataMata.quartas.forEach(jogo => {
+            const chaveEsquerdaContainer = document.getElementById('chave-esquerda');
+            const chaveDireitaContainer = document.getElementById('chave-direita');
+            const finaisContainer = document.getElementById('finais-container');
+            const terceiroLugarContainer = document.getElementById('terceiro-lugar-container');
+
+            chaveEsquerdaContainer.innerHTML = '<div class="fase" id="quartas-esq"><h2>Quartas de Final</h2></div><div class="fase" id="semis-esq"><h2>Semifinal</h2></div>';
+            chaveDireitaContainer.innerHTML = '<div class="fase" id="quartas-dir"><h2>Quartas de Final</h2></div><div class="fase" id="semis-dir"><h2>Semifinal</h2></div>';
+            finaisContainer.innerHTML = '<div class="fase" id="final"><h2>Final</h2></div>';
+            terceiroLugarContainer.innerHTML = '<div class="fase" id="terceiro"><h2>Disputa de 3º Lugar</h2></div>';
+
+            const renderConfronto = (jogo, faseId, icone) => {
                 const time1 = timesMapeados[jogo.time1_placeholder];
                 const time2 = timesMapeados[jogo.time2_placeholder];
-                htmlQuartas += `
-                    <div class="confronto">
-                        <div class="time">
+                return `
+                    <div class="confronto" data-jogo-id="${jogo.id}" data-next-jogo="${jogo.next || ''}" data-next-slot="${jogo.next_slot || ''}" data-next-loser="${jogo.next_loser || ''}" data-next-loser-slot="${jogo.next_loser_slot || ''}">
+                        <div class="time" data-time-id="${time1.id}">
                             <img src="${time1.bandeira}" alt="">
                             <span>${time1.nome}</span>
+                            <button onclick="selecionarVencedor(this)">${icone}</button>
                         </div>
-                        <div class="time">
+                        <div class="time" data-time-id="${time2.id}">
                             <img src="${time2.bandeira}" alt="">
                             <span>${time2.nome}</span>
+                            <button onclick="selecionarVencedor(this)">${icone}</button>
                         </div>
                     </div>
                 `;
+            };
+
+            const renderPlaceholder = (jogo, faseId, icone) => {
+                 return `
+                    <div class="confronto" data-jogo-id="${jogo.id}" data-next-jogo="${jogo.next || ''}" data-next-slot="${jogo.next_slot || ''}" data-next-loser="${jogo.next_loser || ''}" data-next-loser-slot="${jogo.next_loser_slot || ''}">
+                        <div class="time" data-time-id="placeholder-1"></div>
+                        <div class="time" data-time-id="placeholder-2">
+                            ${ faseId === 'final' ? '<span class="versus-final">vs</span>' : '' }
+                        </div>
+                    </div>
+                `;
+            };
+
+            estruturaMataMata.quartas.forEach(jogo => {
+                const icone = jogo.lado === 'esquerda' ? '➠' : '⬅';
+                const containerId = jogo.lado === 'esquerda' ? 'quartas-esq' : 'quartas-dir';
+                document.getElementById(containerId).innerHTML += renderConfronto(jogo, 'quartas', icone);
             });
-            htmlQuartas += '</div>';
 
-            // Placeholder para futuras fases
-            const htmlSemis = '<div class="fase"><h2>Semifinais</h2></div>';
-            const htmlFinal = '<div class="fase"><h2>Final</h2></div>';
+            estruturaMataMata.semis.forEach(jogo => {
+                const icone = jogo.lado === 'esquerda' ? '➠' : '⬅';
+                const containerId = jogo.lado === 'esquerda' ? 'semis-esq' : 'semis-dir';
+                document.getElementById(containerId).innerHTML += renderPlaceholder(jogo, 'semis', icone);
+            });
 
-            container.innerHTML = htmlQuartas + htmlSemis + htmlFinal;
+            estruturaMataMata.final.forEach(jogo => {
+                document.getElementById('final').innerHTML += renderPlaceholder(jogo, 'final', '🏆');
+            });
+            
+            estruturaMataMata.terceiro.forEach(jogo => {
+                document.getElementById('terceiro').innerHTML += renderPlaceholder(jogo, 'terceiro', '➠');
+            });
+
+            window.timesMapeados = timesMapeados;
         });
+}
+
+function selecionarVencedor(botao) {
+    const timeVencedorDiv = botao.parentElement;
+    const confrontoDiv = timeVencedorDiv.parentElement;
+    
+    // Evita erro se clicar em um slot vazio
+    if (!timeVencedorDiv.dataset.timeId || timeVencedorDiv.dataset.timeId.includes('placeholder')) {
+        return;
+    }
+
+    const timesNoConfronto = confrontoDiv.querySelectorAll('.time');
+    timesNoConfronto.forEach(time => {
+        time.classList.remove('vencedor', 'perdedor');
+        const btn = time.querySelector('button');
+        if(btn) btn.style.display = 'inline-block';
+    });
+    
+    timeVencedorDiv.classList.add('vencedor');
+    const timePerdedorDiv = [...timesNoConfronto].find(t => t !== timeVencedorDiv);
+    if (timePerdedorDiv) {
+        timePerdedorDiv.classList.add('perdedor');
+    }
+
+    const avancarTime = (timeDiv, proximoJogoId, proximoSlot) => {
+        if (!proximoJogoId || !proximoSlot || !timeDiv) return;
+
+        const idTime = timeDiv.dataset.timeId;
+        // Encontra o time em qualquer um dos grupos
+        const timeInfo = Object.values(window.dadosCopa).flat().find(t => t.id == idTime);
+        if (!timeInfo) return;
+        
+        const proximoConfrontoDiv = document.querySelector(`.confronto[data-jogo-id="${proximoJogoId}"]`);
+        if (!proximoConfrontoDiv) return;
+
+        const slotNoProximoJogo = proximoConfrontoDiv.querySelector(`.time:nth-child(${proximoSlot})`);
+        if (!slotNoProximoJogo) return;
+        
+        const fase = proximoConfrontoDiv.closest('.fase').id;
+        const lado = proximoConfrontoDiv.closest('.chave')?.id;
+
+        let icone = '➠'; // Padrão
+        if (fase === 'final') {
+            icone = '🏆';
+        } else if (lado === 'chave-direita') {
+            icone = '⬅';
+        }
+
+        slotNoProximoJogo.dataset.timeId = timeInfo.id;
+        slotNoProximoJogo.innerHTML = `
+            <img src="${timeInfo.bandeira}" alt="">
+            <span>${timeInfo.nome}</span>
+            <button onclick="selecionarVencedor(this)">${icone}</button>
+        `;
+        slotNoProximoJogo.classList.remove('vencedor', 'perdedor');
+    };
+
+    // Avança vencedor
+    avancarTime(timeVencedorDiv, confrontoDiv.dataset.nextJogo, confrontoDiv.dataset.nextSlot);
+    
+    // Avança perdedor para a disputa de 3º lugar, se houver
+    if (timePerdedorDiv && confrontoDiv.dataset.nextLoser) {
+        avancarTime(timePerdedorDiv, confrontoDiv.dataset.nextLoser, confrontoDiv.dataset.nextLoserSlot);
+    }
 }

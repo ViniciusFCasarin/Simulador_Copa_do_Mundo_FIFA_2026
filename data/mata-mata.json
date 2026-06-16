@@ -4,46 +4,61 @@
       "id": "qf1",
       "lado": "esquerda",
       "time1_placeholder": "1A",
-      "time2_placeholder": "2C"
+      "time2_placeholder": "2C",
+      "next": "sf1",
+      "next_slot": 1
     },
     {
       "id": "qf2",
       "lado": "esquerda",
       "time1_placeholder": "2B",
-      "time2_placeholder": "32"
+      "time2_placeholder": "32",
+      "next": "sf1",
+      "next_slot": 2
     },
     {
       "id": "qf3",
       "lado": "direita",
       "time1_placeholder": "2A",
-      "time2_placeholder": "1C"
+      "time2_placeholder": "1C",
+      "next": "sf2",
+      "next_slot": 1
     },
     {
       "id": "qf4",
       "lado": "direita",
       "time1_placeholder": "1B",
-      "time2_placeholder": "31"
+      "time2_placeholder": "31",
+      "next": "sf2",
+      "next_slot": 2
     }
   ],
   "semis": [
     {
       "id": "sf1",
       "lado": "esquerda",
-      "time1_placeholder": "Vencedor QF1",
-      "time2_placeholder": "Vencedor QF2"
+      "next": "f1",
+      "next_slot": 1,
+      "next_loser": "tf1",
+      "next_loser_slot": 1
     },
     {
       "id": "sf2",
       "lado": "direita",
-      "time1_placeholder": "Vencedor QF3",
-      "time2_placeholder": "Vencedor QF4"
+      "next": "f1",
+      "next_slot": 2,
+      "next_loser": "tf1",
+      "next_loser_slot": 2
     }
   ],
   "final": [
     {
-      "id": "f1",
-      "time1_placeholder": "Vencedor SF1",
-      "time2_placeholder": "Vencedor SF2"
+      "id": "f1"
+    }
+  ],
+  "terceiro": [
+    {
+      "id": "tf1"
     }
   ]
 }

@@ -3,14 +3,14 @@
     {
       "id": 1,
       "nome": "México",
-      "pontos": 0,
-      "saldo" : 0,
+      "pontos": 6,
+      "saldo" : 3,
       "bandeira": "assets/img/Flag_Mexico.svg"
     },
     {
       "id": 2,
       "nome": "República da Coreia",
-      "pontos": 0,
+      "pontos": 3,
       "saldo" : 0,
       "bandeira": "assets/img/Flag_Republica_da_Coreia.svg"
     },
@@ -18,14 +18,14 @@
       "id": 3,
       "nome": "Tchéquia",
       "pontos": 0,
-      "saldo" : 0,
+      "saldo" : -1,
       "bandeira": "assets/img/Flag_Tchéquia.svg"
     },
     {
       "id": 4,
       "nome": "África do Sul",
       "pontos": 0,
-      "saldo" : 0,
+      "saldo" : -2,
       "bandeira": "assets/img/Flag_Africa_do_Sul.svg"
     }
   ],
@@ -84,6 +84,276 @@
     {
       "id": 12,
       "nome": "Haiti",
+      "pontos": 0,
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_Haiti.svg"
+    }
+  ],
+   "Grupo D": [
+    {
+      "id": 13,
+      "nome": "EUA",
+      "pontos": 0,
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_Escocia.svg"
+    },
+    {
+      "id": 14,
+      "nome": "Austrália",
+      "pontos": 0,
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_Morrocos.svg"
+    },
+    {
+      "id": 15,
+      "nome": "Turquia",
+      "pontos": 0,
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_Brasil.svg"
+    },
+    {
+      "id": 16,
+      "nome": "Paraguai",
+      "pontos": 0,
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_Haiti.svg"
+    }
+  ],
+   "Grupo E": [
+    {
+      "id": 17,
+      "nome": "Alemanha",
+      "pontos": 0,
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_Escocia.svg"
+    },
+    {
+      "id": 18,
+      "nome": "Costa do Marfim",
+      "pontos": 0,
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_Morrocos.svg"
+    },
+    {
+      "id": 19,
+      "nome": "Equador",
+      "pontos": 0,
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_Brasil.svg"
+    },
+    {
+      "id": 20,
+      "nome": "Curaçau",
+      "pontos": 0,
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_Haiti.svg"
+    }
+  ],
+   "Grupo F": [
+    {
+      "id": 21,
+      "nome": "Suécia",
+      "pontos": 0,
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_Escocia.svg"
+    },
+    {
+      "id": 22,
+      "nome": "Japão",
+      "pontos": 0,
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_Morrocos.svg"
+    },
+    {
+      "id": 23,
+      "nome": "Holanda",
+      "pontos": 0,
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_Brasil.svg"
+    },
+    {
+      "id": 24,
+      "nome": "Tunísia",
+      "pontos": 0,
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_Haiti.svg"
+    }
+  ],
+   "Grupo G": [
+    {
+      "id": 25,
+      "nome": "Nova Zelândia",
+      "pontos": 0,
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_Escocia.svg"
+    },
+    {
+      "id": 26,
+      "nome": "Rl do Irã",
+      "pontos": 0,
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_Morrocos.svg"
+    },
+    {
+      "id": 27,
+      "nome": "Bélgica",
+      "pontos": 0,
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_Brasil.svg"
+    },
+    {
+      "id": 28,
+      "nome": "Egito",
+      "pontos": 0,
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_Haiti.svg"
+    }
+  ],
+   "Grupo H": [
+    {
+      "id": 29,
+      "nome": "Uruguai",
+      "pontos": 0,
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_Escocia.svg"
+    },
+    {
+      "id": 30,
+      "nome": "Arábia Saudita",
+      "pontos": 0,
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_Morrocos.svg"
+    },
+    {
+      "id": 31,
+      "nome": "Espanha",
+      "pontos": 0,
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_Brasil.svg"
+    },
+    {
+      "id": 32,
+      "nome": "Cabo Verde",
+      "pontos": 0,
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_Haiti.svg"
+    }
+  ],
+   "Grupo I": [
+    {
+      "id": 33,
+      "nome": "Noruega",
+      "pontos": 0,
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_Escocia.svg"
+    },
+    {
+      "id": 34,
+      "nome": "França",
+      "pontos": 0,
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_Morrocos.svg"
+    },
+    {
+      "id": 35,
+      "nome": "Senegal",
+      "pontos": 0,
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_Brasil.svg"
+    },
+    {
+      "id": 36,
+      "nome": "Iraque",
+      "pontos": 0,
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_Haiti.svg"
+    }
+  ],
+   "Grupo J": [
+    {
+      "id": 37,
+      "nome": "Argentina",
+      "pontos": 0,
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_Escocia.svg"
+    },
+    {
+      "id": 38,
+      "nome": "Áustria",
+      "pontos": 0,
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_Morrocos.svg"
+    },
+    {
+      "id": 39,
+      "nome": "Jordânia",
+      "pontos": 0,
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_Brasil.svg"
+    },
+    {
+      "id": 40,
+      "nome": "Argélia",
+      "pontos": 0,
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_Haiti.svg"
+    }
+  ],
+   "Grupo K": [
+    {
+      "id": 41,
+      "nome": "Colômbia",
+      "pontos": 0,
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_Escocia.svg"
+    },
+    {
+      "id": 42,
+      "nome": "RD do Congo",
+      "pontos": 0,
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_Morrocos.svg"
+    },
+    {
+      "id": 43,
+      "nome": "Portugal",
+      "pontos": 0,
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_Brasil.svg"
+    },
+    {
+      "id": 44,
+      "nome": "Uzbequistão",
+      "pontos": 0,
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_Haiti.svg"
+    }
+  ],
+   "Grupo L": [
+    {
+      "id": 45,
+      "nome": "Inglaterra",
+      "pontos": 0,
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_Escocia.svg"
+    },
+    {
+      "id": 46,
+      "nome": "Gana",
+      "pontos": 0,
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_Morrocos.svg"
+    },
+    {
+      "id": 47,
+      "nome": "Panamá",
+      "pontos": 0,
+      "saldo" : 0,
+      "bandeira": "assets/img/Flag_Brasil.svg"
+    },
+    {
+      "id": 48,
+      "nome": "Croácia",
       "pontos": 0,
       "saldo" : 0,
       "bandeira": "assets/img/Flag_Haiti.svg"

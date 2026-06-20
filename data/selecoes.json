@@ -40,8 +40,8 @@
     {
       "id": 6,
       "nome": "Canadá",
-      "pontos": 0,
-      "saldo" : 0,
+      "pontos": 4,
+      "saldo" : 6,
       "bandeira": "assets/img/Flag_Canada.svg"
     },
     {

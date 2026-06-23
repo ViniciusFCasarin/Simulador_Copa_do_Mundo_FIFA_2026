@@ -381,7 +381,6 @@ function selecionarVencedor(botao) {
     }
 }
 
-// Nova função para criar e exibir o Pop-up dinamicamente
 function mostrarPopupCampeao(campeao) {
     let modal = document.getElementById('modal-campeao');
     
@@ -392,13 +391,13 @@ function mostrarPopupCampeao(campeao) {
         document.body.appendChild(modal);
     }
     
-    // Preenche o modal com os dados do time campeão
+    // Preenche o modal com os dados do time campeão e o botão de recarregar
     modal.innerHTML = `
         <div class="modal-content">
             <h1>🏆 CAMPEÃO DO MUNDO 🏆</h1>
             <img src="${campeao.bandeira}" alt="Bandeira de ${campeao.nome}">
             <h2>${campeao.nome}</h2>
-            <button onclick="document.getElementById('modal-campeao').style.display='none'">Fechar e Ver Tabela</button>
+            <button onclick="window.location.reload()">Novo Palpite</button>
         </div>
     `;
     

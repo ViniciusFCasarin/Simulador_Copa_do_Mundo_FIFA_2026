@@ -41,10 +41,14 @@ fetch(`./data/selecoes.json?nocache=${new Date().getTime()}`)
             `;
         });
 
-        const time1 = dados[nomeGrupo][0];
-        const time2 = dados[nomeGrupo][1];
-        const time3 = dados[nomeGrupo][2];
-        const time4 = dados[nomeGrupo][3];
+        // Resgata a ordem original do grupo ordenando pelo ID (1º, 2º, 3º e 4º)
+        const timesOriginais = [...dados[nomeGrupo]].sort((a, b) => a.id - b.id);
+
+        // Define os confrontos da 3ª Rodada (1º x 3º) e (2º x 4º)
+        const time1 = timesOriginais[0]; // Ex: México
+        const time2 = timesOriginais[2]; // Ex: Tchéquia
+        const time3 = timesOriginais[1]; // Ex: Coreia do Sul
+        const time4 = timesOriginais[3]; // Ex: África do Sul
 
         const idJogo1 = `${nomeGrupo.replace(' ', '')}-1`;
         const idJogo2 = `${nomeGrupo.replace(' ', '')}-2`;
@@ -301,7 +305,17 @@ function construirChaveMataMata(timesMapeados) {
 function selecionarVencedor(botao) {
     const timeVencedorDiv = botao.parentElement;
     const confrontoDiv = timeVencedorDiv.parentElement;
+    const faseAtual = confrontoDiv.closest('.fase').id;
     
+    // 1. TRAVA DA FINAL: Verifica se o jogo é a Final e se o 3º lugar já acabou
+    if (faseAtual === 'final') {
+        const terceiroDecidido = document.querySelector('#terceiro .time.vencedor');
+        if (!terceiroDecidido) {
+            alert('⚠️ Atenção: Defina o vencedor da Disputa de 3º Lugar antes de jogar a Grande Final!');
+            return; // Aborta o clique e não deixa decidir a final
+        }
+    }
+
     if (!timeVencedorDiv.dataset.timeId || timeVencedorDiv.dataset.timeId.includes('placeholder')) {
         return;
     }
@@ -319,6 +333,15 @@ function selecionarVencedor(botao) {
         timePerdedorDiv.classList.add('perdedor');
     }
 
+    // 2. DISPARO DO POP-UP: Se a fase for a final, chama a função do Campeão
+    if (faseAtual === 'final') {
+        const idCampeao = timeVencedorDiv.dataset.timeId;
+        const infoCampeao = Object.values(window.dadosCopa).flat().find(t => t.id == idCampeao);
+        setTimeout(() => {
+            mostrarPopupCampeao(infoCampeao);
+        }, 300); // Aguarda um terço de segundo para o clique computar visualmente antes do pop-up
+    }
+
     const avancarTime = (timeDiv, proximoJogoId, proximoSlot) => {
         if (!proximoJogoId || !proximoSlot || !timeDiv) return;
 
@@ -332,11 +355,11 @@ function selecionarVencedor(botao) {
         const slotNoProximoJogo = proximoConfrontoDiv.querySelector(`.time:nth-child(${proximoSlot})`);
         if (!slotNoProximoJogo) return;
         
-        const fase = proximoConfrontoDiv.closest('.fase').id;
+        const faseProxima = proximoConfrontoDiv.closest('.fase').id;
         const lado = proximoConfrontoDiv.closest('.chave')?.id;
 
         let icone = '➠';
-        if (fase === 'final') {
+        if (faseProxima === 'final') {
             icone = '🏆';
         } else if (lado === 'chave-direita') {
             icone = '⬅';
@@ -356,4 +379,29 @@ function selecionarVencedor(botao) {
     if (timePerdedorDiv && confrontoDiv.dataset.nextLoser) {
         avancarTime(timePerdedorDiv, confrontoDiv.dataset.nextLoser, confrontoDiv.dataset.nextLoserSlot);
     }
+}
+
+// Nova função para criar e exibir o Pop-up dinamicamente
+function mostrarPopupCampeao(campeao) {
+    let modal = document.getElementById('modal-campeao');
+    
+    // Se o modal ainda não existir no HTML, o JS cria ele agora
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'modal-campeao';
+        document.body.appendChild(modal);
+    }
+    
+    // Preenche o modal com os dados do time campeão
+    modal.innerHTML = `
+        <div class="modal-content">
+            <h1>🏆 CAMPEÃO DO MUNDO 🏆</h1>
+            <img src="${campeao.bandeira}" alt="Bandeira de ${campeao.nome}">
+            <h2>${campeao.nome}</h2>
+            <button onclick="document.getElementById('modal-campeao').style.display='none'">Fechar e Ver Tabela</button>
+        </div>
+    `;
+    
+    // Exibe o modal na tela
+    modal.style.display = 'flex';
 }

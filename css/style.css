@@ -162,16 +162,17 @@ body {
                 "esquerda direita"
                 "final final"
                 "terceiro terceiro";
-            max-width: 95%; /* Usa quase toda a largura da tela */
-            margin: 40px auto;
+            max-width: 100%; 
+            margin: 40px 0; 
+            padding: 0 15px; 
             gap: 20px;
             overflow-x: auto; /* Adiciona rolagem horizontal se apertar muito */
         }
 
         .chave {
             display: flex;
-            flex-direction: column;
-            gap: 50px;
+            gap: 20px; 
+            width: 100%; 
         }
 
         #chave-esquerda {
@@ -207,9 +208,9 @@ body {
             display: flex;
             flex-direction: column;
             justify-content: space-around;
-            flex: 1; /* Faz todas as 4 colunas dividirem o espaço por igual */
-            min-width: 180px; /* Impede que os cards fiquem finos demais */
-            margin: 0 5px; /* Dá um respiro entre as fases */
+            flex: 1; 
+            min-width: 220px; 
+            margin: 0 5px; 
             gap: 20px;
         }
 
@@ -259,4 +260,72 @@ body {
 
         .time.perdedor button {
             display: none;
+        }
+
+        /* =========================================
+        POP-UP DO CAMPEÃO DA COPA
+        ========================================= */
+        #modal-campeao {
+            display: none; /* Escondido por padrão */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 50px;
+            border-radius: 15px;
+            text-align: center;
+            animation: zoomIn 0.5s ease;
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.6); /* Brilho Dourado */
+        }
+
+        .modal-content h1 {
+            color: #d4af37; /* Dourado */
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .modal-content img {
+            width: 180px;
+            height: 120px;
+            border: 3px solid #eee;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .modal-content h2 {
+            font-size: 3em;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        .modal-content button {
+            padding: 12px 40px;
+            font-size: 1.2em;
+            font-weight: bold;
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .modal-content button:hover {
+            background-color: #34495e;
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }

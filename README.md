@@ -5,6 +5,8 @@ Como Rodar
     python3 -m http.server
  2. No navegador Web: http://localhost:8000
 
+ > Usar zoom-out na página (90%), para exibir toda tela do mata-mata
+
 ### Arquivo selecoes.json
 
  > As bandeiras devem estar em formato .svg (pegar no http://upload.wikimedia.org)

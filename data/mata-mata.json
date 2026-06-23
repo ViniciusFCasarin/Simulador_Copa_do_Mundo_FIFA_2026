@@ -1,34 +1,206 @@
 {
+  "segundas_de_final": [
+    {
+      "id": "d1",
+      "lado": "esquerda",
+      "time1_placeholder": "1A",
+      "time2_placeholder": "3_1",
+      "next": "o1",
+      "next_slot": 1
+    },
+    {
+      "id": "d2",
+      "lado": "esquerda",
+      "time1_placeholder": "2B",
+      "time2_placeholder": "2C",
+      "next": "o1",
+      "next_slot": 2
+    },
+    {
+      "id": "d3",
+      "lado": "esquerda",
+      "time1_placeholder": "1E",
+      "time2_placeholder": "3_2",
+      "next": "o2",
+      "next_slot": 1
+    },
+    {
+      "id": "d4",
+      "lado": "esquerda",
+      "time1_placeholder": "1F",
+      "time2_placeholder": "2G",
+      "next": "o2",
+      "next_slot": 2
+    },
+    {
+      "id": "d5",
+      "lado": "esquerda",
+      "time1_placeholder": "1I",
+      "time2_placeholder": "3_3",
+      "next": "o3",
+      "next_slot": 1
+    },
+    {
+      "id": "d6",
+      "lado": "esquerda",
+      "time1_placeholder": "2J",
+      "time2_placeholder": "2K",
+      "next": "o3",
+      "next_slot": 2
+    },
+    {
+      "id": "d7",
+      "lado": "esquerda",
+      "time1_placeholder": "1L",
+      "time2_placeholder": "3_4",
+      "next": "o4",
+      "next_slot": 1
+    },
+    {
+      "id": "d8",
+      "lado": "esquerda",
+      "time1_placeholder": "2A",
+      "time2_placeholder": "2D",
+      "next": "o4",
+      "next_slot": 2
+    },
+    {
+      "id": "d9",
+      "lado": "direita",
+      "time1_placeholder": "1B",
+      "time2_placeholder": "3_5",
+      "next": "o5",
+      "next_slot": 1
+    },
+    {
+      "id": "d10",
+      "lado": "direita",
+      "time1_placeholder": "2E",
+      "time2_placeholder": "2H",
+      "next": "o5",
+      "next_slot": 2
+    },
+    {
+      "id": "d11",
+      "lado": "direita",
+      "time1_placeholder": "1C",
+      "time2_placeholder": "3_6",
+      "next": "o6",
+      "next_slot": 1
+    },
+    {
+      "id": "d12",
+      "lado": "direita",
+      "time1_placeholder": "1D",
+      "time2_placeholder": "2F",
+      "next": "o6",
+      "next_slot": 2
+    },
+    {
+      "id": "d13",
+      "lado": "direita",
+      "time1_placeholder": "1G",
+      "time2_placeholder": "3_7",
+      "next": "o7",
+      "next_slot": 1
+    },
+    {
+      "id": "d14",
+      "lado": "direita",
+      "time1_placeholder": "1H",
+      "time2_placeholder": "2I",
+      "next": "o7",
+      "next_slot": 2
+    },
+    {
+      "id": "d15",
+      "lado": "direita",
+      "time1_placeholder": "1J",
+      "time2_placeholder": "3_8",
+      "next": "o8",
+      "next_slot": 1
+    },
+    {
+      "id": "d16",
+      "lado": "direita",
+      "time1_placeholder": "1K",
+      "time2_placeholder": "2L",
+      "next": "o8",
+      "next_slot": 2
+    }
+  ],
+  "oitavas": [
+    {
+      "id": "o1",
+      "lado": "esquerda",
+      "next": "qf1",
+      "next_slot": 1
+    },
+    {
+      "id": "o2",
+      "lado": "esquerda",
+      "next": "qf1",
+      "next_slot": 2
+    },
+    {
+      "id": "o3",
+      "lado": "esquerda",
+      "next": "qf2",
+      "next_slot": 1
+    },
+    {
+      "id": "o4",
+      "lado": "esquerda",
+      "next": "qf2",
+      "next_slot": 2
+    },
+    {
+      "id": "o5",
+      "lado": "direita",
+      "next": "qf3",
+      "next_slot": 1
+    },
+    {
+      "id": "o6",
+      "lado": "direita",
+      "next": "qf3",
+      "next_slot": 2
+    },
+    {
+      "id": "o7",
+      "lado": "direita",
+      "next": "qf4",
+      "next_slot": 1
+    },
+    {
+      "id": "o8",
+      "lado": "direita",
+      "next": "qf4",
+      "next_slot": 2
+    }
+  ],
   "quartas": [
     {
       "id": "qf1",
       "lado": "esquerda",
-      "time1_placeholder": "1A",
-      "time2_placeholder": "2C",
       "next": "sf1",
       "next_slot": 1
     },
     {
       "id": "qf2",
       "lado": "esquerda",
-      "time1_placeholder": "2B",
-      "time2_placeholder": "32",
       "next": "sf1",
       "next_slot": 2
     },
     {
       "id": "qf3",
       "lado": "direita",
-      "time1_placeholder": "2A",
-      "time2_placeholder": "1C",
       "next": "sf2",
       "next_slot": 1
     },
     {
       "id": "qf4",
       "lado": "direita",
-      "time1_placeholder": "1B",
-      "time2_placeholder": "31",
       "next": "sf2",
       "next_slot": 2
     }

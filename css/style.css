@@ -157,14 +157,15 @@ body {
         /* Estilos para a chave do Mata-Mata */
         #mata-mata-container {
             display: grid;
-            grid-template-columns: 1fr 1fr; /* Duas colunas principais para esquerda e direita */
+            grid-template-columns: 1fr 1fr;
             grid-template-areas:
                 "esquerda direita"
                 "final final"
                 "terceiro terceiro";
-            max-width: 1400px;
+            max-width: 95%; /* Usa quase toda a largura da tela */
             margin: 40px auto;
             gap: 20px;
+            overflow-x: auto; /* Adiciona rolagem horizontal se apertar muito */
         }
 
         .chave {
@@ -206,7 +207,9 @@ body {
             display: flex;
             flex-direction: column;
             justify-content: space-around;
-            width: 45%;
+            flex: 1; /* Faz todas as 4 colunas dividirem o espaço por igual */
+            min-width: 180px; /* Impede que os cards fiquem finos demais */
+            margin: 0 5px; /* Dá um respiro entre as fases */
             gap: 20px;
         }
 

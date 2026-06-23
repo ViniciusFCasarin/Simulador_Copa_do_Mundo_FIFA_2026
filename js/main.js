@@ -3,7 +3,8 @@
 // Objeto para guardar o estado atual de cada jogo (qual botão foi clicado)
 const estadoJogos = {};
 
-fetch('./data/selecoes.json')
+// O parâmetro nocache obriga o navegador a ignorar o arquivo salvo
+fetch(`./data/selecoes.json?nocache=${new Date().getTime()}`)
   .then(resposta => {
     if (!resposta.ok) {
         throw new Error('Erro ao carregar o arquivo JSON');
@@ -45,7 +46,6 @@ fetch('./data/selecoes.json')
         const time3 = dados[nomeGrupo][2];
         const time4 = dados[nomeGrupo][3];
 
-        // Identificador único para cada jogo
         const idJogo1 = `${nomeGrupo.replace(' ', '')}-1`;
         const idJogo2 = `${nomeGrupo.replace(' ', '')}-2`;
 
@@ -87,11 +87,10 @@ fetch('./data/selecoes.json')
     containerPrincipal.innerHTML = htmlGerado;
     window.dadosCopa = dados;
 
-    // Adiciona o listener para o botão de avançar
     document.getElementById('avancar-mata-mata').addEventListener('click', avancarParaMataMata);
   })
   .catch(erro => {
-    console.error("❌ Ocorreu um erro ao ler os dados:", erro);
+    console.error("❌ Ocorreu um erro ao ler os dados das seleções:", erro);
   });
 
 function registrarResultado(nomeGrupo, idTime1, idTime2, novoResultado, botaoClicado) {
@@ -102,7 +101,6 @@ function registrarResultado(nomeGrupo, idTime1, idTime2, novoResultado, botaoCli
 
     const resultadoAnterior = estadoJogos[idJogo];
 
-    // 1. Reverte o resultado anterior, se houver
     if (resultadoAnterior) {
         if (resultadoAnterior === 'vitoria') {
             time1.pontos -= 3;
@@ -114,12 +112,9 @@ function registrarResultado(nomeGrupo, idTime1, idTime2, novoResultado, botaoCli
         }
     }
 
-    // 2. Aplica o novo resultado ou desliga se for o mesmo botão
     if (resultadoAnterior === novoResultado) {
-        // Clicou no mesmo botão: desliga o resultado
         delete estadoJogos[idJogo];
     } else {
-        // Clicou num botão diferente: aplica o novo resultado
         if (novoResultado === 'vitoria') {
             time1.pontos += 3;
         } else if (novoResultado === 'empate') {
@@ -174,49 +169,63 @@ function atualizarBotoes(idJogo) {
     }
 }
 
+// Funções do Mata-Mata
 function avancarParaMataMata() {
     const classificados = {};
     const todosOsGrupos = Object.keys(window.dadosCopa);
     let terceirosColocados = [];
 
-    // 1. Identificar classificados de cada grupo
     todosOsGrupos.forEach(nomeGrupo => {
         const timesOrdenados = [...window.dadosCopa[nomeGrupo]].sort((a, b) => b.pontos - a.pontos || b.saldo - a.saldo);
+        const letraGrupo = nomeGrupo.replace('Grupo ', '');
         
-        classificados[`1${nomeGrupo.charAt(6)}`] = timesOrdenados[0];
-        classificados[`2${nomeGrupo.charAt(6)}`] = timesOrdenados[1];
+        classificados[`1${letraGrupo}`] = timesOrdenados[0];
+        classificados[`2${letraGrupo}`] = timesOrdenados[1];
         terceirosColocados.push(timesOrdenados[2]);
     });
 
-    // 2. Ordenar e selecionar os melhores terceiros
     terceirosColocados.sort((a, b) => {
-        if (b.pontos !== a.pontos) {
-            return b.pontos - a.pontos;
-        }
-        if (b.saldo !== a.saldo) {
-            return b.saldo - a.saldo;
-        }
-        return Math.random() - 0.5; // Sorteio aleatório em caso de empate total
+        if (b.pontos !== a.pontos) return b.pontos - a.pontos;
+        if (b.saldo !== a.saldo) return b.saldo - a.saldo;
+        return Math.random() - 0.5; 
     });
 
-    classificados['31'] = terceirosColocados[0];
-    classificados['32'] = terceirosColocados[1];
+    for (let i = 0; i < 8; i++) {
+        classificados[`3_${i + 1}`] = terceirosColocados[i];
+    }
 
-    // 3. Construir e exibir o mata-mata
     construirChaveMataMata(classificados);
 }
 
 function construirChaveMataMata(timesMapeados) {
-    fetch('./data/mata-mata.json')
+    // Quebra-cache aplicado aqui também para garantir o novo mata-mata.json
+    fetch(`./data/mata-mata.json?nocache=${new Date().getTime()}`)
         .then(response => response.json())
         .then(estruturaMataMata => {
+            
+            // Trava de segurança para caso o JSON carregado seja o velho
+            if (!estruturaMataMata.segundas_de_final) {
+                console.error("❌ ERRO: O navegador ainda carregou o mata-mata.json velho sem as Segundas de Final.");
+                return;
+            }
+
             const chaveEsquerdaContainer = document.getElementById('chave-esquerda');
             const chaveDireitaContainer = document.getElementById('chave-direita');
             const finaisContainer = document.getElementById('finais-container');
             const terceiroLugarContainer = document.getElementById('terceiro-lugar-container');
 
-            chaveEsquerdaContainer.innerHTML = '<div class="fase" id="quartas-esq"><h2>Quartas de Final</h2></div><div class="fase" id="semis-esq"><h2>Semifinal</h2></div>';
-            chaveDireitaContainer.innerHTML = '<div class="fase" id="quartas-dir"><h2>Quartas de Final</h2></div><div class="fase" id="semis-dir"><h2>Semifinal</h2></div>';
+            chaveEsquerdaContainer.innerHTML = `
+                <div class="fase" id="segundas-esq"><h2>16-avos</h2></div>
+                <div class="fase" id="oitavas-esq"><h2>Oitavas</h2></div>
+                <div class="fase" id="quartas-esq"><h2>Quartas</h2></div>
+                <div class="fase" id="semis-esq"><h2>Semifinal</h2></div>
+            `;
+            chaveDireitaContainer.innerHTML = `
+                <div class="fase" id="segundas-dir"><h2>16-avos</h2></div>
+                <div class="fase" id="oitavas-dir"><h2>Oitavas</h2></div>
+                <div class="fase" id="quartas-dir"><h2>Quartas</h2></div>
+                <div class="fase" id="semis-dir"><h2>Semifinal</h2></div>
+            `;
             finaisContainer.innerHTML = '<div class="fase" id="final"><h2>Final</h2></div>';
             terceiroLugarContainer.innerHTML = '<div class="fase" id="terceiro"><h2>Disputa de 3º Lugar</h2></div>';
 
@@ -250,10 +259,22 @@ function construirChaveMataMata(timesMapeados) {
                 `;
             };
 
+            estruturaMataMata.segundas_de_final.forEach(jogo => {
+                const icone = jogo.lado === 'esquerda' ? '➠' : '⬅';
+                const containerId = jogo.lado === 'esquerda' ? 'segundas-esq' : 'segundas-dir';
+                document.getElementById(containerId).innerHTML += renderConfronto(jogo, 'segundas_de_final', icone);
+            });
+
+            estruturaMataMata.oitavas.forEach(jogo => {
+                const icone = jogo.lado === 'esquerda' ? '➠' : '⬅';
+                const containerId = jogo.lado === 'esquerda' ? 'oitavas-esq' : 'oitavas-dir';
+                document.getElementById(containerId).innerHTML += renderPlaceholder(jogo, 'oitavas', icone);
+            });
+
             estruturaMataMata.quartas.forEach(jogo => {
                 const icone = jogo.lado === 'esquerda' ? '➠' : '⬅';
                 const containerId = jogo.lado === 'esquerda' ? 'quartas-esq' : 'quartas-dir';
-                document.getElementById(containerId).innerHTML += renderConfronto(jogo, 'quartas', icone);
+                document.getElementById(containerId).innerHTML += renderPlaceholder(jogo, 'quartas', icone);
             });
 
             estruturaMataMata.semis.forEach(jogo => {
@@ -271,6 +292,9 @@ function construirChaveMataMata(timesMapeados) {
             });
 
             window.timesMapeados = timesMapeados;
+        })
+        .catch(erro => {
+            console.error("❌ Erro ao desenhar o Mata-Mata:", erro);
         });
 }
 
@@ -278,7 +302,6 @@ function selecionarVencedor(botao) {
     const timeVencedorDiv = botao.parentElement;
     const confrontoDiv = timeVencedorDiv.parentElement;
     
-    // Evita erro se clicar em um slot vazio
     if (!timeVencedorDiv.dataset.timeId || timeVencedorDiv.dataset.timeId.includes('placeholder')) {
         return;
     }
@@ -300,7 +323,6 @@ function selecionarVencedor(botao) {
         if (!proximoJogoId || !proximoSlot || !timeDiv) return;
 
         const idTime = timeDiv.dataset.timeId;
-        // Encontra o time em qualquer um dos grupos
         const timeInfo = Object.values(window.dadosCopa).flat().find(t => t.id == idTime);
         if (!timeInfo) return;
         
@@ -313,7 +335,7 @@ function selecionarVencedor(botao) {
         const fase = proximoConfrontoDiv.closest('.fase').id;
         const lado = proximoConfrontoDiv.closest('.chave')?.id;
 
-        let icone = '➠'; // Padrão
+        let icone = '➠';
         if (fase === 'final') {
             icone = '🏆';
         } else if (lado === 'chave-direita') {
@@ -329,10 +351,8 @@ function selecionarVencedor(botao) {
         slotNoProximoJogo.classList.remove('vencedor', 'perdedor');
     };
 
-    // Avança vencedor
     avancarTime(timeVencedorDiv, confrontoDiv.dataset.nextJogo, confrontoDiv.dataset.nextSlot);
     
-    // Avança perdedor para a disputa de 3º lugar, se houver
     if (timePerdedorDiv && confrontoDiv.dataset.nextLoser) {
         avancarTime(timePerdedorDiv, confrontoDiv.dataset.nextLoser, confrontoDiv.dataset.nextLoserSlot);
     }

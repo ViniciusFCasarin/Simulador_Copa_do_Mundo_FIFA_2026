@@ -17,17 +17,27 @@
 
     <h1>🏆 Simulador de Copa</h1>
     
+    <p class="instrucoes" id="instrucoes-grupos" align = center>
+        ⚽ <strong>Fase de Grupos:</strong> Defina os resultados clicando nos botões (Vitória/Empate) abaixo de cada jogo. A tabela atualiza seus pontos e saldos automaticamente. Quando finalizar a 3ª rodada, desça a página e avance de fase!
+    </p>
+    
     <div id="grupos-container"></div>
 
+    
     <div id="avancar-container">
         <button id="avancar-mata-mata">Avançar para o Mata-Mata</button>
     </div>
+
+    <p class="instrucoes" id="instrucoes-mata-mata" align = center>
+        ⚔️ <strong>Mata-Mata:</strong> Clique no botão ao lado da seleção para declará-la vencedora e avançar de fase. <br><em>Atenção: A Grande Final só será liberada após você decidir o jogo de 3º Lugar!</em>
+    </p>
 
     <div id="mata-mata-container">
         <div id="chave-esquerda" class="chave"></div>
         <div id="chave-direita" class="chave"></div>
         <div id="finais-container"></div>
         <div id="terceiro-lugar-container"></div>
+        
     </div>
 
     <script src="./js/main.js"></script>

@@ -1,11 +1,18 @@
-Como Rodar
+Como Rodar e Fechar
+ > Click duas vezes no inicializador iniciar_simulador.bat
+ 
+ > Para fechar, clique no 'x' da aba do terminal.
+
+ > Obs.: Usar zoom-out na página (90%), para exibir toda tela do mata-mata
+
+Como Rodar Manualmente
  1. Em um terminal na pasta raiz: 
     
     ```bash
     python3 -m http.server
  2. No navegador Web: http://localhost:8000
 
- > Usar zoom-out na página (90%), para exibir toda tela do mata-mata
+
 
 ### Arquivo selecoes.json
 

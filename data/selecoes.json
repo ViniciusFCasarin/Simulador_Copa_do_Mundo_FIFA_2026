@@ -303,29 +303,29 @@
     {
       "id": 41,
       "nome": "Colômbia",
-      "pontos": 3,
-      "saldo": 2,
+      "pontos": 6,
+      "saldo": 3,
       "bandeira": "assets/img/Flag_Colombia.svg"
     },
     {
       "id": 42,
       "nome": "Congo DR",
       "pontos": 1,
-      "saldo": 0,
+      "saldo": -1,
       "bandeira": "assets/img/Flag_Congo_DR.svg"
     },
     {
       "id": 43,
       "nome": "Portugal",
-      "pontos": 1,
-      "saldo": 0,
+      "pontos": 4,
+      "saldo": 5,
       "bandeira": "assets/img/Flag_Portugal.svg"
     },
     {
       "id": 44,
       "nome": "Uzbequistão",
       "pontos": 0,
-      "saldo": -2,
+      "saldo": -7,
       "bandeira": "assets/img/Flag_Uzbequistao.svg"
     }
   ],
@@ -333,14 +333,14 @@
     {
       "id": 45,
       "nome": "Inglaterra",
-      "pontos": 3,
+      "pontos": 4,
       "saldo": 2,
       "bandeira": "assets/img/Flag_Inglaterra.svg"
     },
     {
       "id": 46,
       "nome": "Gana",
-      "pontos": 3,
+      "pontos": 4,
       "saldo": 1,
       "bandeira": "assets/img/Flag_Gana.svg"
     },
@@ -348,14 +348,14 @@
       "id": 47,
       "nome": "Panamá",
       "pontos": 0,
-      "saldo": -1,
+      "saldo": -2,
       "bandeira": "assets/img/Flag_Panama.svg"
     },
     {
       "id": 48,
       "nome": "Croácia",
-      "pontos": 0,
-      "saldo": -2,
+      "pontos": 3,
+      "saldo": -1,
       "bandeira": "assets/img/Flag_Croacia.svg"
     }
   ]
